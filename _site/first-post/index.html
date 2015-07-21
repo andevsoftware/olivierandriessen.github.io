@@ -15,6 +15,77 @@
     
   </title>
 
+  <style>
+      #full-screen-loader {
+          font-family: 'Source Sans Pro', sans-serif;
+          display: block !important;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: #fff;
+          z-index: 9999;
+          opacity:0;
+          visibility: hidden;
+          -webkit-transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+          -moz-transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+          transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+      }
+
+      #full-screen-loader .loader {
+          background-color: transparent;
+          margin: 0 auto;
+          font-size: 10px;
+          text-indent: -9999em;
+          border-top: 2px solid rgba(0, 0, 0, 0);
+          border-right: 2px solid #4285f4;
+          border-bottom: 2px solid #4285f4;
+          border-left: 2px solid #4285f4;
+          -webkit-animation: loader 1200ms infinite linear;
+          animation: loader 800ms infinite linear;
+      }
+
+      #full-screen-loader .loader,
+      #full-screen-loader .loader:after {
+          border-radius: 50%;
+          width: 34px;
+          height: 34px;
+          margin-top: -17px;
+          margin-left: -17px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+      }
+
+      @-webkit-keyframes loader {
+          0% {
+              -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+          }
+          100% {
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+          }
+      }
+
+      @keyframes loader {
+          0% {
+              -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+          }
+          100% {
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+          }
+      }
+
+      #full-screen-loader.visible {
+          opacity: 1;
+          visibility: visible;
+      }
+  </style>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
@@ -42,6 +113,10 @@
 </script>
 
   <body>
+
+    <div id="full-screen-loader" class="visible">
+        <div class="loader"></div>
+    </div>
 
     <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
      styles, `#sidebar-checkbox` for behavior. -->
@@ -71,12 +146,24 @@
       
     
       
+        
+          <a class="sidebar-nav-item" href="/archive/">Archive</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/contact/">Contact</a>
+        
+      
     
   </nav>
 
   <div class="sidebar-item">
     <p>
-      &copy; 2015. All rights reserved.
+      &copy; 2015. Olivier Andriessen.
     </p>
   </div>
 </div>
@@ -88,16 +175,16 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="/" title="Home">Olivier Andriessen</a>
-            <small>Random articles about web development</small>
+            <span class="current-page">First Post</span>
+            
+            <small class="date">21 Jul 2015</small>
+            
           </h3>
         </div>
       </div>
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">First Post</h1>
-  <span class="post-date">21 Jul 2015</span>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio optio, officiis eum soluta, necessitatibus quas sint, natus repudiandae officia alias illum sunt quaerat a veniam ipsa aut. Consequuntur, numquam nisi!</p>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi nobis nesciunt facilis ex consequatur aperiam libero, suscipit molestiae assumenda, unde quidem adipisci sed! Cupiditate repudiandae dolor soluta, quos minima corrupti!</p>
@@ -139,6 +226,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus deleniti 
 
     <script>
       (function(document) {
+
+        var loader = document.querySelector('#full-screen-loader');
+        loader.classList.remove('visible');
+
         var toggle = document.querySelector('.sidebar-toggle');
         var sidebar = document.querySelector('#sidebar');
         var checkbox = document.querySelector('#sidebar-checkbox');

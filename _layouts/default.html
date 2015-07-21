@@ -6,6 +6,10 @@
 
   <body>
 
+    <div id="full-screen-loader" class="visible">
+        <div class="loader"></div>
+    </div>
+
     {% include sidebar.html %}
 
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
@@ -14,8 +18,10 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
+            <span class="current-page">{{ page.title }}</span>
+            {% if page.date %}
+            <small class="date">{{ page.date | date_to_string }}</small>
+            {% endif %}
           </h3>
         </div>
       </div>
@@ -31,6 +37,10 @@
 
     <script>
       (function(document) {
+
+        var loader = document.querySelector('#full-screen-loader');
+        loader.classList.remove('visible');
+
         var toggle = document.querySelector('.sidebar-toggle');
         var sidebar = document.querySelector('#sidebar');
         var checkbox = document.querySelector('#sidebar-checkbox');
