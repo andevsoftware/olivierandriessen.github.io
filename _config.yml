@@ -1,25 +1,32 @@
+# Dependencies
+markdown:         redcarpet
+redcarpet:
+  extensions: ["tables"]
+
+pygments:         true
+
 # Permalinks
-#
-# Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
-relative_permalinks: true
+permalink:        pretty
 
 # Setup
-title:               Developer Notes
-tagline:             'by Olivier Andriessen'
-description:         'Sharing my thoughts and ideas about web development.'
-url:                 http://olivierandriessen.com
-baseurl:             ''
-paginate:            5
+title:            Olivier Andriessen
+tagline:          'Random articles about web development'
+description:      'Sharing random thoughts and ideas about web development.'
+url:              http://www.olivierandriessen.com
+shorturl:         olivierandriessen.com
 
-# About/contact
 author:
-  name:              Olivier Andriessen
-  url:               http://olivierandriessen.com
+  name:           'Olivier Andriessen'
+  url:            http://github.com/olivierandriessen
   email:             olivierandriessen@gmail.com
 
+paginate:         5
+
 # Custom vars
-version:             1.0.0
+version:          1.0.0
+
+github:
+  repo:           github.com/olivierandriessen/olivierandriessen.github.io
 
 # Allow URL Redirects: 
 #  * https://help.github.com/articles/redirects-on-github-pages

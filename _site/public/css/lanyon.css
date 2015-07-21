@@ -41,13 +41,13 @@ body {
 }
 
 html {
-  font-family: "PT Serif", Georgia, "Times New Roman", serif;
+  font-family: "Open Sans", Georgia, "Times New Roman", serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  color: #313131;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: #222;
   letter-spacing: -.025rem;
 }
 
@@ -328,7 +328,8 @@ a.sidebar-nav-item:focus {
   display: block;
   margin-top: -.5rem;
   margin-bottom: 1rem;
-  color: #9a9a9a;
+  color: #888;
+  font-weight: 300;
 }
 
 /* Related posts */
