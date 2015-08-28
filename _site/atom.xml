@@ -4,7 +4,7 @@
  <title>Olivier Andriessen</title>
  <link href="http://www.olivierandriessen.com/atom.xml" rel="self"/>
  <link href="http://www.olivierandriessen.com/"/>
- <updated>2015-07-22T00:27:56+02:00</updated>
+ <updated>2015-08-28T09:32:57+02:00</updated>
  <id>http://www.olivierandriessen.com</id>
  <author>
    <name>Olivier Andriessen</name>
@@ -13,16 +13,130 @@
 
  
  <entry>
-   <title>First Post</title>
-   <link href="http://www.olivierandriessen.com/first-post"/>
-   <updated>2015-07-21T00:00:00+02:00</updated>
+   <title>Getting Started with Phalcon REST</title>
+   <link href="http://www.olivierandriessen.com/getting-started-with-phalcon-rest"/>
+   <updated>2015-08-28T00:00:00+02:00</updated>
    <id>http://www.olivierandriessen.com/getting-started-with-phalcon-rest</id>
-   <content type="html">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio optio, officiis eum soluta, necessitatibus quas sint, natus repudiandae officia alias illum sunt quaerat a veniam ipsa aut. Consequuntur, numquam nisi!&lt;/p&gt;
+   <content type="html">&lt;p&gt;Setting up a REST API that is scalable, maintainable and better to document can be a huge amount of work. - &lt;em&gt;But it can be a lot less.&lt;/em&gt; Phalcon REST provides a library of interchangable classes to help with authentication, permissions and formatting responses. &lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi nobis nesciunt facilis ex consequatur aperiam libero, suscipit molestiae assumenda, unde quidem adipisci sed! Cupiditate repudiandae dolor soluta, quos minima corrupti!&lt;/p&gt;
+&lt;p&gt;First we look at the steps on how to set up a new project using the Phalcon REST boilerplate. After that we&amp;#39;ll cover each concept.&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis labore in minima sunt molestiae vitae ut nesciunt dignissimos. Delectus soluta ipsum dolorem similique odio voluptatem, tempora ut cupiditate, eaque rerum!
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus deleniti repellat ipsum accusamus et aliquid nemo excepturi maiores, recusandae libero nihil harum velit odit magnam laboriosam fugit ipsam atque eaque.&lt;/p&gt;
+&lt;h2&gt;Quick start&lt;/h2&gt;
+
+&lt;p&gt;A quick sum up, so you can quickly jump to each topic.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#get-started&quot;&gt;Get Started&lt;/a&gt; (&lt;em&gt;Installing boilerplate&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#test-endpoints-using-postman&quot;&gt;Test endpoints using Postman&lt;/a&gt; (&lt;em&gt;You won&amp;#39;t regret to read this first&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#creating-a-user&quot;&gt;Creating a user&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#retrieving-user&quot;&gt;Retrieving user&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#creating-a-product&quot;&gt;Creating a product&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#retrieving-products&quot;&gt;Retrieving product(s)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#updating-a-product&quot;&gt;Updating a product&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#removing-a-product&quot;&gt;Removing a product&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;get-started&quot; href=&quot;#get-started&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Get Started&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h3&gt;Prerequisites&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PHP 5.6 or higher&lt;/li&gt;
+&lt;li&gt;Phalcon v2 or higher&lt;/li&gt;
+&lt;li&gt;Composer&lt;/li&gt;
+&lt;li&gt;SQL-database&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Cloning project&lt;/h3&gt;
+
+&lt;p&gt;We start with cloning the boilerplate&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/olivierandriessen/phalcon-rest-boilerplate my-project&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then &lt;code&gt;cd&lt;/code&gt; into that folder&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;my-project&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Install dependencies&lt;/h3&gt;
+
+&lt;p&gt;Then we use &lt;a href=&quot;https://getcomposer.org/&quot;&gt;composer&lt;/a&gt; to pull in the dependencies&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;composer install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: When you are using a virtual box and you haven&amp;#39;t installed Phalcon locally, you need to pass the flag &lt;code&gt;--ignore-platform-reqs&lt;/code&gt; to the command.&lt;/p&gt;
+
+&lt;h3&gt;Setup config files&lt;/h3&gt;
+
+&lt;h4&gt;Default configuration&lt;/h4&gt;
+
+&lt;p&gt;Next, copy &lt;code&gt;app/configs/default.template.php&lt;/code&gt; and rename it to &lt;code&gt;app/configs/default.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cp app/configs/default.template.php app/configs/default.php&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can adjust this file to your needs later on.&lt;/p&gt;
+
+&lt;h4&gt;Environment based configuration&lt;/h4&gt;
+
+&lt;p&gt;We need to copy &lt;code&gt;app/configs/server.template.php&lt;/code&gt; and rename it to &lt;code&gt;app/configs/server.develop.php&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cp app/configs/server.template.php app/configs/server.develop.php&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Lets say you need to test this project on a staging server, what you could do is add &lt;code&gt;staging&lt;/code&gt; to the switch statement inside of &lt;code&gt;app/bootstrap/config.php&lt;/code&gt; and specify which config file to load. In order for this to work all you need to do after that is set the &lt;code&gt;APPLICATION_ENV&lt;/code&gt; to &lt;code&gt;staging&lt;/code&gt; on that environment.&lt;/p&gt;
+
+&lt;h3&gt;Import sql schema&lt;/h3&gt;
+
+&lt;p&gt;Assuming that you&amp;#39;ve configured your database connection in &lt;code&gt;app/configs/server.develop.php&lt;/code&gt; we can now import the sql schema from &lt;code&gt;schema/schema.sql&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;It&amp;#39;s working!&lt;/h3&gt;
+
+&lt;p&gt;Now we&amp;#39;ve set everything up properly, when we open up the browser we should see the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/images/getting-started-with-phalcon-rest-image-1.png&quot; alt=&quot;It&amp;#39;s working&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;test-endpoints-using-postman&quot; href=&quot;#test-endpoints-using-postman&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Test endpoints using Postman&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h3&gt;Installing Postman&lt;/h3&gt;
+
+&lt;p&gt;Postman is a Chrome extension for building, testing and documenting API requests and keeping them organized inside collections. We are going to take advantage of that. But first we need to have it installed.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://getpostman.com&quot;&gt;Download Postman for Chrome&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Importing collection&lt;/h3&gt;
+
+&lt;p&gt;Phalcon REST boilerplate comes with a built-in generator that outputs a Postman collection based on your endpoints.
+It&amp;#39;s located at &lt;code&gt;/export/postman-collection.json&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/images/getting-started-with-phalcon-rest-image-2.png&quot; alt=&quot;Import collection&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;After you have saved the file to your local machine we can now open up Postman and import it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/images/getting-started-with-phalcon-rest-image-3.png&quot; alt=&quot;Import collection&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we&amp;#39;ve imported the collection we can start testing our endpoints!&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;creating-a-user&quot; href=&quot;#creating-a-user&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Creating a user&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;retrieving-user&quot; href=&quot;#retrieving-user&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Retrieving user&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;creating-a-product&quot; href=&quot;#creating-a-product&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Creating a product&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;retrieving-a-product&quot; href=&quot;#retrieving-a-product&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Retrieving a product&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;updating-a-product&quot; href=&quot;#updating-a-product&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Updating a product&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2&gt;&lt;a name=&quot;removing-a-product&quot; href=&quot;#removing-a-product&quot;&gt;&lt;span class=&quot;heading-link icon ion-link&quot;&gt;&lt;/span&gt;Removing a product&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
 </content>
  </entry>
  

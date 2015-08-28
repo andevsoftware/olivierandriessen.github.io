@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Getting Started with Phalcon REST &middot; Olivier Andriessen
+    
+  </title>
+
+  <style>
+      #full-screen-loader {
+          font-family: 'Source Sans Pro', sans-serif;
+          display: block !important;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: #fff;
+          z-index: 9999;
+          opacity:0;
+          visibility: hidden;
+          -webkit-transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+          -moz-transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+          transition: visibility 0s ease-out 0.7s, opacity 0.7s ease-out 0.5s;
+      }
+
+      #full-screen-loader .loader {
+          background-color: transparent;
+          margin: 0 auto;
+          font-size: 10px;
+          text-indent: -9999em;
+          border-top: 2px solid rgba(0, 0, 0, 0);
+          border-right: 2px solid #4285f4;
+          border-bottom: 2px solid #4285f4;
+          border-left: 2px solid #4285f4;
+          -webkit-animation: loader 1200ms infinite linear;
+          animation: loader 1200ms infinite linear;
+      }
+
+      #full-screen-loader .loader,
+      #full-screen-loader .loader:after {
+          border-radius: 50%;
+          width: 34px;
+          height: 34px;
+          margin-top: -17px;
+          margin-left: -17px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+      }
+
+      @-webkit-keyframes loader {
+          0% {
+              -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+          }
+          100% {
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+          }
+      }
+
+      @keyframes loader {
+          0% {
+              -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+          }
+          100% {
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+          }
+      }
+
+      #full-screen-loader.visible {
+          opacity: 1;
+          visibility: visible;
+      }
+  </style>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400,600,700,300">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script>
+    var test = {
+  "homepage": "",
+  "name": "Olivier Andriessen",
+  "description": "Random articles about web development",
+  "author": "Olivier Andriessen",
+  "posts": [
+  {
+    "url": "/getting-started-with-phalcon-rest",
+    "slug": "getting-started-with-phalcon-rest",
+    "title": "Getting Started with Phalcon REST",
+    "published_on": "2015-08-28 00:00:00 +0200",
+    "excerpt": "Setting up a REST API that is scalable, maintainable and better to document can be a huge amount of work. - But it can be a lot less. Phalcon REST provides a library of interchangable classes to help with authentication, permissions and formatting responses. First we look at the steps on how to set up...",
+    "tags": "",
+    "categories": ""
+  }]
+};
+  </script>
+</head>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50191030-3', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+  <body>
+
+    <div id="full-screen-loader" class="visible">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Sharing random thoughts and ideas about web development.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/archive/">Archive</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/contact/">Contact</a>
+        
+      
+    
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; Olivier Andriessen - 2015.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead" style="background-color: #e6db74">
+        <div class="container">
+          <h3 class="masthead-title">
+            <span class="current-page">Getting Started with Phalcon REST</span>
+            
+            <small class="date">28 Aug 2015</small>
+            
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <p>Setting up a REST API that is scalable, maintainable and better to document can be a huge amount of work. - <em>But it can be a lot less.</em> Phalcon REST provides a library of interchangable classes to help with authentication, permissions and formatting responses. </p>
+
+<p>First we look at the steps on how to set up a new project using the Phalcon REST boilerplate. After that we&#39;ll cover each concept.</p>
+
+<h2>Quick start</h2>
+
+<p>A quick sum up, so you can quickly jump to each topic.</p>
+
+<ul>
+<li><a href="#get-started">Get Started</a> (<em>Installing boilerplate</em>)</li>
+<li><a href="#test-endpoints-using-postman">Test endpoints using Postman</a> (<em>You won&#39;t regret to read this first</em>)</li>
+<li><a href="#creating-a-user">Creating a user</a></li>
+<li><a href="#retrieving-user">Retrieving user</a></li>
+<li><a href="#creating-a-product">Creating a product</a></li>
+<li><a href="#retrieving-products">Retrieving product(s)</a></li>
+<li><a href="#updating-a-product">Updating a product</a></li>
+<li><a href="#removing-a-product">Removing a product</a></li>
+</ul>
+
+<h2><a name="get-started" href="#get-started"><span class="heading-link icon ion-link"></span>Get Started</a></h2>
+
+<h3>Prerequisites</h3>
+
+<ul>
+<li>PHP 5.6 or higher</li>
+<li>Phalcon v2 or higher</li>
+<li>Composer</li>
+<li>SQL-database</li>
+</ul>
+
+<h3>Cloning project</h3>
+
+<p>We start with cloning the boilerplate</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/olivierandriessen/phalcon-rest-boilerplate my-project</code></pre></div>
+
+<p>Then <code>cd</code> into that folder</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>my-project</code></pre></div>
+
+<h3>Install dependencies</h3>
+
+<p>Then we use <a href="https://getcomposer.org/">composer</a> to pull in the dependencies</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">composer install</code></pre></div>
+
+<p>Note: When you are using a virtual box and you haven&#39;t installed Phalcon locally, you need to pass the flag <code>--ignore-platform-reqs</code> to the command.</p>
+
+<h3>Setup config files</h3>
+
+<h4>Default configuration</h4>
+
+<p>Next, copy <code>app/configs/default.template.php</code> and rename it to <code>app/configs/default.php</code></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cp app/configs/default.template.php app/configs/default.php</code></pre></div>
+
+<p><strong>Note:</strong> You can adjust this file to your needs later on.</p>
+
+<h4>Environment based configuration</h4>
+
+<p>We need to copy <code>app/configs/server.template.php</code> and rename it to <code>app/configs/server.develop.php</code>.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cp app/configs/server.template.php app/configs/server.develop.php</code></pre></div>
+
+<p><strong>Tip:</strong> Lets say you need to test this project on a staging server, what you could do is add <code>staging</code> to the switch statement inside of <code>app/bootstrap/config.php</code> and specify which config file to load. In order for this to work all you need to do after that is set the <code>APPLICATION_ENV</code> to <code>staging</code> on that environment.</p>
+
+<h3>Import sql schema</h3>
+
+<p>Assuming that you&#39;ve configured your database connection in <code>app/configs/server.develop.php</code> we can now import the sql schema from <code>schema/schema.sql</code>.</p>
+
+<h3>It&#39;s working!</h3>
+
+<p>Now we&#39;ve set everything up properly, when we open up the browser we should see the following:</p>
+
+<p><img src="/public/images/getting-started-with-phalcon-rest-image-1.png" alt="It&#39;s working"></p>
+
+<h2><a name="test-endpoints-using-postman" href="#test-endpoints-using-postman"><span class="heading-link icon ion-link"></span>Test endpoints using Postman</a></h2>
+
+<h3>Installing Postman</h3>
+
+<p>Postman is a Chrome extension for building, testing and documenting API requests and keeping them organized inside collections. We are going to take advantage of that. But first we need to have it installed.</p>
+
+<p><a href="http://getpostman.com">Download Postman for Chrome</a></p>
+
+<h3>Importing collection</h3>
+
+<p>Phalcon REST boilerplate comes with a built-in generator that outputs a Postman collection based on your endpoints.
+It&#39;s located at <code>/export/postman-collection.json</code>.</p>
+
+<p><img src="/public/images/getting-started-with-phalcon-rest-image-2.png" alt="Import collection"></p>
+
+<p>After you have saved the file to your local machine we can now open up Postman and import it.</p>
+
+<p><img src="/public/images/getting-started-with-phalcon-rest-image-3.png" alt="Import collection"></p>
+
+<p>Now we&#39;ve imported the collection we can start testing our endpoints!</p>
+
+<h2><a name="creating-a-user" href="#creating-a-user"><span class="heading-link icon ion-link"></span>Creating a user</a></h2>
+
+<p>Coming soon</p>
+
+<h2><a name="retrieving-user" href="#retrieving-user"><span class="heading-link icon ion-link"></span>Retrieving user</a></h2>
+
+<p>Coming soon</p>
+
+<h2><a name="creating-a-product" href="#creating-a-product"><span class="heading-link icon ion-link"></span>Creating a product</a></h2>
+
+<p>Coming soon</p>
+
+<h2><a name="retrieving-a-product" href="#retrieving-a-product"><span class="heading-link icon ion-link"></span>Retrieving a product</a></h2>
+
+<p>Coming soon</p>
+
+<h2><a name="updating-a-product" href="#updating-a-product"><span class="heading-link icon ion-link"></span>Updating a product</a></h2>
+
+<p>Coming soon</p>
+
+<h2><a name="removing-a-product" href="#removing-a-product"><span class="heading-link icon ion-link"></span>Removing a product</a></h2>
+
+<p>Coming soon</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+  </ul>
+</div>
+
+        
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'olivierandriessen';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+      </div>
+    </div>
+
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+
+        var loader = document.querySelector('#full-screen-loader');
+        loader.classList.remove('visible');
+
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
